@@ -1,0 +1,111 @@
+<section class="">
+  <div class=" py-3">
+    <div class="border border-4 rounded">
+      <form  [formGroup]="searchForm" (ngSubmit)="updateSearchParams(searchForm.value)">
+        <div class=" m-2 ">
+
+          <div class="  row d-flex justify-content-center ">
+            <div class="   col-xs-12 col-sm-12 col-md-2    form-group ">
+              <div class="d-flex justify-content-center">
+                <label  for="name">Name</label>
+              </div>
+              <div>
+                <input formControlName="name" class="form-control">
+              </div>
+            </div>
+            <div class="  col-xs-12 col-sm-12 col-md-2  form-group ">
+              <div class="d-flex justify-content-center">
+                <label  for="platform">Platform</label>
+              </div>
+              <div>
+                <select id="platform" formControlName="platform" class="form-control">
+                  <option value="">All Platforms</option>
+                  <option value="pc">PC</option>
+                  <option value="browser">Browser</option>
+                </select>
+              </div>
+
+            </div>
+          
+            <div class="   col-xs-12 col-sm-12 col-md-2    form-group ">
+              <div class="d-flex justify-content-center">
+                <label for="category">Category</label>
+              </div>
+              <select id="category" formControlName="category" class="form-control">
+                <option value="">Select Category</option>
+                <option *ngFor="let category of categories" [value]="category.value">{{ category.name }}</option>
+              </select>
+            </div>
+
+            <div class="   col-xs-12 col-sm-12 col-md-2   form-group ">
+              <div class="d-flex justify-content-center">
+                <label for="sortBy">Sort By</label>
+              </div>
+              
+              <select id="sortBy" formControlName="sortBy" class="form-control">
+                <option value="">Select Sort Option</option>
+                <option value="release-date">Release Date</option>
+                <option value="popularity">Popularity</option>
+                <option value="alphabetical">Alphabetical</option>
+                <option value="relevance">Relevance</option>
+              </select>
+            </div>
+          
+            <div class="  col-xs-12 col-sm-12 col-md-2  form-group ">
+              <div class="d-flex justify-content-center">
+                <label for="tags">Tags</label>
+              </div>
+              
+              <select id="tags" formControlName="tags" class="form-control">
+                <option value="">Select tag</option>
+                <option *ngFor="let tag of tagsList" [value]="tag.value">{{ tag.name }}</option>
+              </select>
+            </div>
+            
+          </div>
+          <div class="   mt-4 d-flex justify-content-end ">
+            <button (click)="clearSearch()" class="btn btn-warning mx-2">Clear search</button>
+            <button type="submit" class="btn btn-primary">Search</button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+  </div>
+
+
+  <div class="row  " *ngIf="paginatedGames$ | async as paginatedGames; else noData ">
+    <div class="col col-sm-12 col-md-6 col-lg-4   " *ngFor="let game of paginatedGames">
+      <div class="d-flex justify-content-center m-3" >
+        <app-cards [game]="game" [urlRedirection]="urlRedirection"></app-cards>
+      </div>
+
+    </div>
+
+</div>
+
+<ng-template #noData>
+  <h2 class="text-center">Data not available</h2>
+</ng-template>
+  
+  <!-- Controles de Paginación -->
+  <div  *ngIf="paginatedGames$ | async as paginatedGames; " class="d-flex justify-content-center mt-3">
+    <div class="">
+      <button  class="btn btn-primary mx-2"
+        (click)="changePage(currentPage - 1)" 
+        [disabled]="currentPage === 1">
+        Anterior
+      </button>
+    
+      <span class="badge bg-info text-dark p-3">Página {{ currentPage }} de {{ totalPages }}</span>
+    
+      <button 
+      class="btn btn-primary mx-2"
+        (click)="changePage(currentPage + 1)" 
+        [disabled]="currentPage === totalPages">
+        Siguiente
+      </button>
+    </div>
+  </div>
+</section>
+

@@ -1,0 +1,14 @@
+<div class="card" style="width: 18rem; height: 25rem;">
+  <img [src]="game.thumbnail" class="card-img-top" alt="{{ game.title }}">
+  <div class="card-body">
+    <h5 class="card-title">{{ game.title }}</h5>
+    <p class="card-text">{{ game.short_description |truncate}}</p>
+
+  </div>
+  <div class="d-flex justify-content-center" >
+    <div>
+      <a  [routerLink]="[urlRedirection, game.id]" class="btn btn-primary m-2" >More Info</a>
+      <a [href]="game.game_url" class="btn btn-warning" target="_blank">Play Now</a>
+    </div>
+  </div>
+</div>

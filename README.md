@@ -1,6 +1,15 @@
-# TestsUi
+# TestsUi Eduardo Pimentel
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.11.
+## Clone repo
+
+git clone url_proyect
+
+## install dependencies
+
+ npm install
+
+
+This project was generated with [Angular CLI] version 13.3.11.
 
 ## Development server
 

@@ -1,0 +1,88 @@
+<section>
+    <div routerLink="/main/games/list" class="my-2">
+        <button class="btn btn-warning">Go back</button>
+    </div>
+    <div *ngIf="game; else loading">
+
+        <section class="d-none d-sm-block d-sm-none d-md-block d-md-none d-lg-block d-lg-none d-xl-block">
+            <app-carousel [images]="game.screenshots"></app-carousel>
+        </section>
+    
+        <div class="row mb-3">
+            <section class="col col-sm-12 col-md-12 col-lg-6 mt-2">
+                <div class="card">
+                    
+                    <div class="card-body">
+                    <h5 class="card-title">{{ game.title }}</h5>
+                        <img [src]="game.thumbnail" alt="{{ game.title }}">
+                    <p class="card-text">{{game.short_description}}</p>
+                    <div>
+                        <h6 class="my-2">Description:</h6>
+                        <p class="card-text">{{ game.description }}</p>
+                    </div>
+                    <div>
+                        <h6 class="my-2">Developer:</h6>
+                        <p class="card-text">{{game.publisher}}</p>
+                        <a target="_blank" routerLink="game.freetogame_profile_url"><p class="card-text">{{ game.developer }} </p></a>
+                        <a target="_blank" routerLink="game.game_url">Web Oficial</a> 
+                    </div>
+                    <div>
+                        <h6 class="my-2">Genere:</h6>
+                        <p class="card-text">{{game.genre}}</p>
+                    </div>
+                    <div >
+                        <h6 class="my-2">Platform:</h6>
+                        <p class="card-text">{{game.platform}}</p>
+                    </div>
+                    <div >
+                        <h6 class="my-2">Status:</h6>
+                        <span *ngIf="game.status === 'Live'" class="badge rounded-pill py-2 px-3 bg-success">{{ game.status }} </span>
+                        <span *ngIf="game.status != 'Live'" class="badge rounded-pill py-2 px-3 bg-danger">{{ game.status }} </span>
+                    </div>
+                    <div>
+                        <h6 class="my-2">Release:</h6>
+                        <p class="card-text">{{game.release_date|date}}</p>
+                    </div>
+
+                    </div>
+                </div>
+                    
+            
+                
+            
+            </section>
+            
+            <section *ngIf="game.minimum_system_requirements" class="col col col-sm-12 col-md-12 col-lg-6 mt-2">
+                    <div class="card">
+                        
+                        <div class="card-body">
+                            <h5 class="card-title">Requeriments:</h5>
+                            <div>
+                                <h6 class="my-2">Graphics:</h6>
+                                <p class="card-text">{{game.minimum_system_requirements.graphics}}</p>
+                            </div>
+                            <div class="">
+                            <h6 class="my-2">Memory:</h6>
+                            <p class="card-text">{{game.minimum_system_requirements.memory}}</p>
+                            </div>
+                            <div>
+                            <h6 class="my-2">Os:</h6>
+                            <p class="card-text">{{game.minimum_system_requirements.os}}</p>
+                            </div>
+                            <div>
+                            <h6 class="my-2">Processor:</h6>
+                            <p class="card-text">{{game.minimum_system_requirements.processor}}</p>
+                            </div>
+                            <div>
+                                <h6 class="my-2">Storage:</h6>
+                                <p class="card-text">{{game.minimum_system_requirements.storage}}</p>
+                            </div>
+                        </div>
+                    </div>
+            </section>
+        </div>
+        </div>
+        <ng-template #loading>
+        <h2 class="text-center">Data not available</h2>
+        </ng-template>
+</section>
